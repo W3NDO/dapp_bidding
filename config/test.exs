@@ -1,5 +1,18 @@
 import Config
 
+# Only in tests, remove the complexity from the password hashing algorithm
+config :bcrypt_elixir, :log_rounds, 1
+
+# Env vars for postgres
+if File.exists?(".env") do
+  for line <- File.read!(".env") |> String.split("\n") do
+    case String.split(line, "=", parts: 2) do
+      [key, value] -> System.put_env(String.trim(key), String.trim(value))
+      _ -> :ok
+    end
+  end
+end
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -7,7 +20,7 @@ import Config
 # Run `mix help test` for more information.
 config :dapp_bidding, DappBidding.Repo,
   username: "postgres",
-  password: "postgres",
+  password: System.get_env("DB_PASSWORD"),
   hostname: "localhost",
   database: "dapp_bidding_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,

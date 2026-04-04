@@ -1,0 +1,58 @@
+<div>
+    <% sample_items = [
+        %{
+            image: "https://picsum.photos/400/300",
+            price: "120.00",
+            seller: "John 123",
+            time_left: "2h 13m"
+        },
+        %{
+            image: "https://picsum.photos/400/300",
+            price: "120.00",
+            seller: "John 123",
+            time_left: "2h 13m"
+        },
+        %{
+            image: "https://picsum.photos/400/300",
+            price: "120.00",
+            seller: "John 123",
+            time_left: "2h 13m"
+        },
+        %{
+            image: "https://picsum.photos/400/300",
+            price: "120.00",
+            seller: "John 123",
+            time_left: "2h 13m"
+        },
+        %{
+            image: "https://picsum.photos/400/300",
+            price: "120.00",
+            seller: "John 123",
+            time_left: "2h 13m"
+        }
+    ] %>
+    <div class="my-auto mx-2 p-2 flex flex-col w-full justify-around">
+        <div>
+            <p> My Wallet:  </p>
+        </div>
+        <div>
+            <p> Amount: </p>
+        </div>
+    </div>
+
+    <div class="my-auto mx-2 p-2 flex flex-col items-center justify-around">
+        <div>
+            <p> MARKET PLACE </p>
+        </div>
+        <div class="my-auto mx-2 p-2 flex flex-wrap align-center justify-around">
+            <%= for item <- sample_items do %>
+                <DappBiddingWeb.Components.ItemCardComponent.card
+                    image={item.image}
+                    price={item.price}
+                    seller={item.seller}
+                    time_left={item.time_left}
+                />
+            <% end  %>
+        </div>
+    </div>
+</div>
