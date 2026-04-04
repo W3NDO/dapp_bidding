@@ -1,43 +1,17 @@
 <div>
-    <% sample_items = [
-        %{
-            image: "https://picsum.photos/400/300",
-            price: "120.00",
-            seller: "John 123",
-            time_left: "2h 13m"
-        },
-        %{
-            image: "https://picsum.photos/400/300",
-            price: "120.00",
-            seller: "John 123",
-            time_left: "2h 13m"
-        },
-        %{
-            image: "https://picsum.photos/400/300",
-            price: "120.00",
-            seller: "John 123",
-            time_left: "2h 13m"
-        },
-        %{
-            image: "https://picsum.photos/400/300",
-            price: "120.00",
-            seller: "John 123",
-            time_left: "2h 13m"
-        },
-        %{
-            image: "https://picsum.photos/400/300",
-            price: "120.00",
-            seller: "John 123",
-            time_left: "2h 13m"
-        }
-    ] %>
     <div class="my-auto mx-2 p-2 flex flex-col w-full justify-around">
-        <div>
-            <p> My Wallet:  </p>
-        </div>
-        <div>
-            <p> Amount: </p>
-        </div>
+        <%= if @wallet_address do %> 
+            <div>
+                <p> My Wallet: {@wallet_address} </p>
+            </div>
+            <div>
+                <p> Amount: </p>
+            </div>
+        <% else %>
+            <div id="wallet" phx-hook=".ConnectWallet">
+                <button type="button" id="connect-btn" class="bg-purple-600 p-2 rounded-md">Connect Wallet</button>
+            </div>
+        <% end  %>
     </div>
 
     <div class="my-auto mx-2 p-2 flex flex-col items-center justify-around">
@@ -45,7 +19,7 @@
             <p> MARKET PLACE </p>
         </div>
         <div class="my-auto mx-2 p-2 flex flex-wrap align-center justify-around">
-            <%= for item <- sample_items do %>
+            <%= for item <- @auction_items do %>
                 <DappBiddingWeb.Components.ItemCardComponent.card
                     image={item.image}
                     price={item.price}
@@ -56,3 +30,29 @@
         </div>
     </div>
 </div>
+
+<script :type={Phoenix.LiveView.ColocatedHook} name=".ConnectWallet">
+  export default {
+    mounted() {
+    const button = this.el.querySelector("#connect-btn");
+
+    button.addEventListener("click", async () => {
+        if (!window.ethereum) {
+        alert("MetaMask not found");
+        return;
+        }
+
+        try {
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts"
+        });
+
+        this.pushEvent("wallet_connected", { address: accounts[0] });
+
+        } catch (err) {
+        console.error(err);
+        }
+    });
+    }
+  }
+</script>

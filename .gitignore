@@ -35,4 +35,6 @@ dapp_bidding-*.tar
 npm-debug.log
 /assets/node_modules/
 /.env
+/node_modules
+
 

@@ -114,7 +114,7 @@ contract Auction{
 
         // 3. Interaction
         (bool success, ) = beneficiary.call{value: highestBid}("");
-        (bool success, ) = _transferItem(msg.sender, auctionItemId);
+        // (bool success, ) = _transferItem(msg.sender, auctionItemId);
         require( success );
 
     }

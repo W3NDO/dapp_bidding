@@ -23,10 +23,10 @@ defmodule DappBiddingWeb.Components.ItemCardComponent do
           </span>
         </div>
 
-        <div class="text-sm text-white">
+        <div class="text-sm text-black">
           Seller: <span class="font-medium text-gray-800">{@seller}</span>
         </div>
-        <button class="mt-2 w-full bg-purple-600 text-white py-2 rounded-xl hover:bg-blue-700 transition" phx-click="place_bid">
+        <button class="mt-2 w-full bg-purple-600 text-black py-2 rounded-xl hover:bg-blue-700 transition" phx-click="place_bid">
           Place Bid
         </button>
       </div>

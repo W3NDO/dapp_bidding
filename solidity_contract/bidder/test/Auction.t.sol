@@ -67,7 +67,7 @@ contract AuctionTest is Test {
         vm.deal(bidder1, 10 ether);
         vm.deal(bidder2, 10 ether);
 
-        // First bid
+        // First bid (also current highest bid)
         vm.prank(bidder1);
         auction.bid{value: 1.2 ether}();
 
