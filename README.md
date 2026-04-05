@@ -4,7 +4,9 @@ Hi there SubVisual devs
 
 This is a bidding platform built on elixir and foundry. 
 
-Ideally it is for bidding on game items(think CSGO). It's taken a while because I was out of town for a while. 
+Ideally it is for bidding on game items(think CSGO). It's taken a while because I was out of town for a while. I was not able to finish it within the 2-4 hour timeframe. I am yet to get a user initiated interaction from the phoenix frontend(I suspect this is a matter of configuration)
+
+I worked on this project Saturday evening and Sunday afternoon(April 4th and April 5th) 
 
 
 ## Requirements
@@ -25,10 +27,9 @@ Ideally it is for bidding on game items(think CSGO). It's taken a while because 
 
 ### Steps
 1. Create a `.env` file in the repo with a single entry `DB_PASSWORD=<YOUR PASSWORD>`. This is used for the database. 
-2. Sometimes, the assets need to be compiled before CSS works correctly. Run `mix assets.deploy` and it will ensure your assets & CSS work correctly.
-=====
-3. Update `.net.env` with the `RPC_URL` and your `privatekey` (Confrim this)
-====
+2. Sometimes, the assets need to be compiled before CSS works correctly. Run `mix assets.deploy` and it will ensure your assets & CSS work correctly
+3. I am using foundry's anvil to deploy and test my contract. if you also are using foundry's anvil, ensure to deploy the contracts there by following this [guide](https://blockchain-dev-pratik.hashnode.dev/deploying-smart-contracts-locally-with-foundry-anvil-a-beginners-guide)
+4. Install elixir phoenix dependencies with `mix deps.get` and create the database with `mix ecto.create` and run the migrations with `mix ecto.migrate`
 
 ## Foundry/Solidity
 - This is can be found at `solidity_contract/bidder`. 
@@ -53,13 +54,9 @@ For simplicity, I pre-seeded the auction items in the contract. That way the imp
 In production, most of the things that fail are unhandled errors. I made sure to write tests to cover majority of my error handling. I have not written tests in Solidity before so this was a welcome challenge. 
 
 ### Design language
-I sacrificed design for functionality. By using framework scaffolds from Phoenix(`mix phx.gen.auth`) to generate user models and stand in, hard-coded auction_items, I was able to build the project much faster. 
+I sacrificed design for functionality. By using framework scaffolds from Phoenix(`mix phx.gen.auth`) to generate user models and stand in, pre-seeded auction_items from the contract, I was able to build the project much faster. 
 
 I also I strive to use [conventional commits](https://www.conventionalcommits.org/) to make our commit messages more readable. It is such that you can go through the commit messages to understand what was being built when. I will however say that I did not use a clear branching strategy for the project because of time constraints. 
-
-
-## Confirmation
-I confirm that all the code written here is my own with references to documentation and stackoverflow examples. 
 
 
 ## References
@@ -74,3 +71,7 @@ I confirm that all the code written here is my own with references to documentat
 - [Ethereumex](https://hexdocs.pm/ethereumex/Ethereumex.html#content)
 - [ Sepolia testnet & faucets ]( https://tradersunion.com/interesting-articles/testnet/best-testnets-and-airdrops/sepolia/ )
 - [Deploying to Sepolia testnet](https://metana.io/blog/how-to-deploy-a-smart-contract-to-the-sepolia-testnet/)
+
+## Conclusions
+
+This was a fun project. haven't worked with anything crypto in  4 years and it was amazing how much has changed. 
