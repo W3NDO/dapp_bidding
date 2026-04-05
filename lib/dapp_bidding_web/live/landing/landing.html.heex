@@ -1,34 +1,36 @@
 <div>
-    <div class="my-auto mx-2 p-2 flex flex-col w-full justify-around">
-        <%= if @wallet_address do %> 
-            <div>
-                <p> My Wallet: {@wallet_address} </p>
-            </div>
-            <div>
-                <p> Amount: </p>
-            </div>
-        <% else %>
-            <div id="wallet" phx-hook=".ConnectWallet">
-                <button type="button" id="connect-btn" class="bg-purple-600 p-2 rounded-md">Connect Wallet</button>
-            </div>
-        <% end  %>
-    </div>
+  <div class="my-auto mx-2 p-2 flex flex-col w-full justify-around">
+    <%= if @wallet_address do %>
+      <div>
+        <p>My Wallet: {@wallet_address}</p>
+      </div>
+      <div>
+        <p>Amount:</p>
+      </div>
+    <% else %>
+      <div id="wallet" phx-hook=".ConnectWallet">
+        <button type="button" id="connect-btn" class="bg-purple-600 p-2 rounded-md">
+          Connect Wallet
+        </button>
+      </div>
+    <% end %>
+  </div>
 
-    <div class="my-auto mx-2 p-2 flex flex-col items-center justify-around">
-        <div>
-            <p> MARKET PLACE </p>
-        </div>
-        <div class="my-auto mx-2 p-2 flex flex-wrap align-center justify-around">
-            <%= for item <- @auction_items do %>
-                <DappBiddingWeb.Components.ItemCardComponent.card
-                    image={item.image}
-                    price={item.price}
-                    seller={item.seller}
-                    time_left={item.time_left}
-                />
-            <% end  %>
-        </div>
+  <div class="my-auto mx-2 p-2 flex flex-col items-center justify-around">
+    <div>
+      <p>MARKET PLACE</p>
     </div>
+    <div class="my-auto mx-2 p-2 flex flex-wrap align-center justify-around">
+      <%= for item <- @auction_items do %>
+        <DappBiddingWeb.Components.ItemCardComponent.card
+          image={item.image}
+          price={item.price}
+          contract={item.contract}
+          time_left={item.time_left}
+        />
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <script :type={Phoenix.LiveView.ColocatedHook} name=".ConnectWallet">

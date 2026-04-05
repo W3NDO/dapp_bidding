@@ -8,7 +8,6 @@ contract AuctionTest is Test {
     Auction public auction;
     receive() external payable {} // required for the payout tests
 
-
     function setUp() public {
         auction = new Auction(1 days, payable(address(this)), 1234567890);
     }
@@ -38,19 +37,17 @@ contract AuctionTest is Test {
         assertTrue(success);
         assertEq(bidder.balance, 9 ether); // takes bidders money
         assertEq(address(auction).balance, 10 ether); // contract now has 1 more ether
-
     }
 
-    function test_AuctionNotEnded() public{
+    function test_AuctionNotEnded() public {
         vm.expectRevert(Auction.AuctionNotYetEnded.selector);
         auction.auctionEnd();
     }
 
-    function test_AuctionAlreadyEnded() public{
-        uint biddingTime = 1 days;
+    function test_AuctionAlreadyEnded() public {
+        uint256 biddingTime = 1 days;
 
         auction = new Auction(1 days, payable(address(this)), 1234567890);
-
 
         // advance time past auction closing
         vm.warp(block.timestamp + biddingTime + 1);

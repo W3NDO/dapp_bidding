@@ -17,9 +17,18 @@ Ideally it is for bidding on game items(think CSGO). It's taken a while because 
 2. Foundry. 
 
 ## Setup
-1. Run `setup.sh`. This installs Erlang, elixir and foundry.
-2. Create a `.env` file in the repo with a single entry `DB_PASSWORD=<YOUR PASSWORD>`. This is used for the database. 
-3. Sometimes, the assets need to be compiled before CSS works correctly. Run `mix assets.deploy` and it will ensure your assets & CSS work correctly.
+### Requirements
+1. Elixir
+2. Erlang
+3. Foundry 
+4. Metamask extension on browser
+
+### Steps
+1. Create a `.env` file in the repo with a single entry `DB_PASSWORD=<YOUR PASSWORD>`. This is used for the database. 
+2. Sometimes, the assets need to be compiled before CSS works correctly. Run `mix assets.deploy` and it will ensure your assets & CSS work correctly.
+=====
+3. Update `.net.env` with the `RPC_URL` and your `privatekey` (Confrim this)
+====
 
 ## Foundry/Solidity
 - This is can be found at `solidity_contract/bidder`. 
@@ -37,6 +46,8 @@ While Solidity is a given, I decided to build the frontend with Elixir phoenix. 
 Auction platforms are many on documentations for web3 languages, (specifically NEAR and Solidity). And I find that I understand the concept clearly enough that I would not be bogged down in development research as much.
 
 Similarly, I wanted to create something for which functionality  is easy to verify. I adapted code from the solidity documentation, and focused on improvements and testing(as the code on the docs has no tests)
+
+For simplicity, I pre-seeded the auction items in the contract. That way the important part here is user-interaction with the contract. (In an ideal world I would create bots to bid on the contracts as well to simulate competition in the market.)
 
 ### Tests.
 In production, most of the things that fail are unhandled errors. I made sure to write tests to cover majority of my error handling. I have not written tests in Solidity before so this was a welcome challenge. 
@@ -60,3 +71,6 @@ I confirm that all the code written here is my own with references to documentat
 - [Understanding Sepolia](https://tradersunion.com/interesting-articles/testnet/best-testnets-and-airdrops/sepolia/)
 - [More on Sepolia](https://sepolia.dev/)
 - [Elixir collocated hooks](https://elixircasts.io/liveview-colocated-hooks)
+- [Ethereumex](https://hexdocs.pm/ethereumex/Ethereumex.html#content)
+- [ Sepolia testnet & faucets ]( https://tradersunion.com/interesting-articles/testnet/best-testnets-and-airdrops/sepolia/ )
+- [Deploying to Sepolia testnet](https://metana.io/blog/how-to-deploy-a-smart-contract-to-the-sepolia-testnet/)
